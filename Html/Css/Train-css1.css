@@ -1,0 +1,19 @@
+h1{
+   font-family: "Indie Flower", sans-serif;  
+   font-style: bold;
+   color: green;
+   font-size: 3em;
+   text-align: center;
+}
+
+p{
+    font-family: verdana, sans-serif;  
+    color: red;
+    font-size: 0.9em;
+}
+
+.ingress{
+    font-family: Arial, "Indie Flower", sans-serif;
+    font-style: bold;
+    font-size: 1.2em;
+}
