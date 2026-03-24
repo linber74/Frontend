@@ -39,6 +39,18 @@ img {
     
 }   
 
+.navbar {
+    max-width: 100%;
+    width: 100%;
+}
+.navbar .nav-link {
+    color: #6f3f82;
+}
+
+.navbar .nav-link:hover {
+    color: #b44fff;
+}
+
 footer {
     background-color: #29293b;
     text-align: center;
