@@ -5,7 +5,8 @@ function login(username, password) {
     if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
         alert("Inloggning lyckades!");
         localStorage.setItem("loggedIn", "true");
-        window.location.href = "admin.html";
+        document.getElementById("adminPanel").style.display = "block";
+        document.querySelector("section").style.display = "none";
     } else {
         alert("Felaktigt användarnamn eller lösenord.");
     }
@@ -17,6 +18,13 @@ function checkLogin() {
         alert("Du måste logga in för att se denna sida.");
         window.location.href = "index.html";
     }
+}
+
+function handleLogin(event) {
+    event.preventDefault();
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    login(username, password);
 }
 
 function logout() {
@@ -39,6 +47,14 @@ function addGame (name, imgURL, link, description) {
     game.push({ name, imgURL, link, description });
     saveGame(game);
     alert("Spelet har lagts till!");
+}
+
+function handleAddGame() {
+    const name = document.getElementById("name").value;
+    const imgURL = document.getElementById("imgURL").value;
+    const link = document.getElementById("link").value;
+    const description = document.getElementById("description").value;
+    addGame(name, imgURL, link, description);
 }
 
 function removeGame(index) {

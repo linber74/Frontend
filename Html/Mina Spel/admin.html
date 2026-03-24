@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ebrone's Backstage</title>
+    <link rel="stylesheet" href="../bootstrap.css">
+</head>
+<body>
+    <section>
+        <form action="" onsubmit="handleLogin(event)">
+            <div class = "mx-5 my-5">
+            <h2>Admin Logga in</h2>
+            
+            <label for="username" class="form-label col-4">Användarnamn:</label>
+            <div class="mb-3 col-4">
+                <input type="text" id="username" name="username" class="form-control" required>
+            </div>
+            <label for="password" class="form-label col-4">Lösenord:</label>
+            <div class="mb-3 col-4">
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Logga in</button>
+            </div>
+        </form>
+    </section>
+
+    <section>
+        <div id="adminPanel" class="container mt-5" style="display: none;">
+            <h2>Admin Panel</h2>
+            <p>Välkommen till Ebrone's Backstage! Här kan du hantera spel.</p>
+
+            <label for="name" class="form-label">Spelnamn:</label>
+            <div class="mb-3">
+                <input type="text" id="name" class="form-control">
+            </div>
+            <label for="imgURL" class="form-label">Bild URL:</label>
+            <div class="mb-3">
+                <input type="text" id="imgURL" class="form-control">
+            </div>
+            <label for="link" class="form-label">Länk:</label>
+            <div class="mb-3">
+                <input type="text" id="link" class="form-control">
+            </div>
+            <label for="description" class="form-label">Beskrivning:</label>
+            <div class="mb-3">
+                <textarea id="description" class="form-control"></textarea>
+            </div>
+            <button type="button" class="btn btn-success" onclick="handleAddGame()">Lägg till spel</button>
+            <button class="btn btn-danger" onclick="logout()">Logga ut</button>
+        </div>
+    </section>
+    
+    
+   <script src="../spel.js"></script> 
+</body>
+</html>
