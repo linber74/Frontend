@@ -1,5 +1,6 @@
 const ADMIN_USERNAME = "Ebrone";
 const ADMIN_PASSWORD = "1234";
+let editIndex = -1;
 
 function login(username, password) {
     if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
@@ -7,6 +8,7 @@ function login(username, password) {
         localStorage.setItem("loggedIn", "true");
         document.getElementById("adminPanel").style.display = "block";
         document.querySelector("section").style.display = "none";
+        displayGames();
     } else {
         alert("Felaktigt användarnamn eller lösenord.");
     }
@@ -30,7 +32,7 @@ function handleLogin(event) {
 function logout() {
     localStorage.removeItem("loggedIn");
     alert("Du har loggat ut.");
-    window.location.href = "index.html";
+    window.location.href = "Mina_spel.html";
 }
 
 function getGame() {
@@ -50,11 +52,32 @@ function addGame (name, imgURL, link, description) {
 }
 
 function handleAddGame() {
+    
+    if (editIndex != -1) {
+        const game = getGame();
+        game[editIndex] = {
+            name: document.getElementById("name").value,    
+            imgURL: document.getElementById("imgURL").value,
+            link: document.getElementById("link").value,
+            description: document.getElementById("description").value,
+        };
+        editIndex = -1;
+        saveGame(game);
+        document.getElementById("addGameForm").reset();
+        alert("Spelet har uppdaterats!");
+        displayGames();
+        
+    }else {
+
     const name = document.getElementById("name").value;
     const imgURL = document.getElementById("imgURL").value;
     const link = document.getElementById("link").value;
     const description = document.getElementById("description").value;
     addGame(name, imgURL, link, description);
+        document.getElementById("addGameForm").reset();
+        displayGames(); 
+    }  
+     
 }
 
 function removeGame(index) {
@@ -63,6 +86,22 @@ function removeGame(index) {
         game.splice(index, 1);
         saveGame(game);
         alert("Spelet har tagits bort!");
+        displayGames();
+    } else {
+        alert("Ogiltigt index.");
+    }
+}
+
+function editGame(index) {
+    const game = getGame();
+    if (index >= 0 && index < game.length) {
+        document.getElementById("name").value = game[index].name;
+        document.getElementById("imgURL").value = game[index].imgURL;
+        document.getElementById("link").value = game[index].link;
+        document.getElementById("description").value = game[index].description;
+        
+        editIndex = index;
+
     } else {
         alert("Ogiltigt index.");
     }
@@ -76,11 +115,29 @@ function displayGames() {
         const gameItem = document.createElement("div");
         gameItem.className = "game-item";
         gameItem.innerHTML = `
-            <h3>${g.name}</h3>
-            <img src="${g.imgURL}" alt="${g.name}" class="game-image">
-            <p>${g.description}</p>
-            <a href="${g.link}" target="_blank">Spela nu</a>
+            <h5>${g.name}</h5>
+            <button onclick="removeGame(${index})">Ta bort</button>
+            <button onclick="editGame(${index})">Redigera</button>
+            <hr>
         `;
         gameList.appendChild(gameItem);
+    });
+}
+
+function gameGallery () {
+    const game = getGame();
+    const gallery = document.getElementById("game-gallery");
+    gallery.innerHTML = "";
+
+    game.forEach((g) => {
+        const gameItem = document.createElement("div");
+        gameItem.className = "game-item";
+        gameItem.innerHTML = `
+            <h3>${g.name}</h3>
+            <a href="${g.link}" class = "image" target="_blank">
+            <img src="${g.imgURL}" alt="${g.name}"></a>
+            <p>${g.description}</p>
+        `;
+        gallery.appendChild(gameItem);
     });
 }

@@ -16,15 +16,16 @@ h2 {
     color: #b44fff;
     margin-top: 40px;
 } 
-img {
-   
+.image {
+    
+}  
+
+.game-item img {
     width: 250px;
     height: 160px;
     object-fit: contain;
     border-radius: 10px;
-    
-}  
-
+}
 .game-gallery {
     display: flex;
     flex-wrap: wrap;
@@ -36,8 +37,19 @@ img {
      
         transform: scale(1.05);
         transition: transform 0.3s ease;
-    
 }   
+
+.game-item {
+    text-align: center;
+    color: #00ff99;
+}
+
+.game-item p {
+    color: #eaeaea;
+    font-size: 0.9em;
+    max-width: 250px;
+    margin: 5px auto;
+}
 
 .navbar {
     max-width: 100%;

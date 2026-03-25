@@ -20,6 +20,13 @@
             <div class="mb-3 col-4">
                 <input type="password" id="password" name="password" class="form-control" required>
             </div>
+            <div class="mb-3">
+            <input type="checkbox" id="showPassword" onclick="
+                document.getElementById('password').type = 
+                this.checked ? 'text' : 'password'
+            ">
+                <label for="showPassword">Visa lösenord</label>
+            </div>
             <button type="submit" class="btn btn-primary">Logga in</button>
             </div>
         </form>
@@ -29,7 +36,8 @@
         <div id="adminPanel" class="container mt-5" style="display: none;">
             <h2>Admin Panel</h2>
             <p>Välkommen till Ebrone's Backstage! Här kan du hantera spel.</p>
-
+            
+            <form id = "addGameForm">
             <label for="name" class="form-label">Spelnamn:</label>
             <div class="mb-3">
                 <input type="text" id="name" class="form-control">
@@ -46,12 +54,21 @@
             <div class="mb-3">
                 <textarea id="description" class="form-control"></textarea>
             </div>
-            <button type="button" class="btn btn-success" onclick="handleAddGame()">Lägg till spel</button>
+            <button type="button" class="btn btn-success" onclick="handleAddGame()">Spara ändringar</button>
+            </form>
+            <br><br><br>
+            <hr>
+            <h2>Sparade spel</h2>
+            <hr>
+            <div id="game-list"></div>
+            <br><br><br>
             <button class="btn btn-danger" onclick="logout()">Logga ut</button>
+            
+            
         </div>
     </section>
     
     
-   <script src="../spel.js"></script> 
+   <script src="spel.js"></script> 
 </body>
 </html>
