@@ -4,20 +4,19 @@ let editIndex = -1;
 
 function login(username, password) {
     if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-        alert("Inloggning lyckades!");
+
         localStorage.setItem("loggedIn", "true");
         document.getElementById("adminPanel").style.display = "block";
         document.querySelector("section").style.display = "none";
         displayGames();
     } else {
-        alert("Felaktigt användarnamn eller lösenord.");
+        showMessage("Felaktigt användarnamn eller lösenord.", "error", "loginMessage");
     }
 }
 
 function checkLogin() {
     const loggedIn = localStorage.getItem("loggedIn");
     if (loggedIn !== "true") {
-        alert("Du måste logga in för att se denna sida.");
         window.location.href = "index.html";
     }
 }
@@ -31,7 +30,6 @@ function handleLogin(event) {
 
 function logout() {
     localStorage.removeItem("loggedIn");
-    alert("Du har loggat ut.");
     window.location.href = "Mina_spel.html";
 }
 
@@ -48,7 +46,7 @@ function addGame (name, imgURL, link, description) {
     const game = getGame();
     game.push({ name, imgURL, link, description });
     saveGame(game);
-    alert("Spelet har lagts till!");
+    showMessage("Spelet har lagts till!", "success", "gameMessage");
 }
 
 function handleAddGame() {
@@ -64,7 +62,7 @@ function handleAddGame() {
         editIndex = -1;
         saveGame(game);
         document.getElementById("addGameForm").reset();
-        alert("Spelet har uppdaterats!");
+        showMessage("Spelet har uppdaterats!", "success", "gameMessage");
         displayGames();
         
     }else {
@@ -85,10 +83,10 @@ function removeGame(index) {
     if (index >= 0 && index < game.length) {
         game.splice(index, 1);
         saveGame(game);
-        alert("Spelet har tagits bort!");
+        showMessage("Spelet har tagits bort!", "success", "gameMessage");
         displayGames();
     } else {
-        alert("Ogiltigt index.");
+        showMessage("Ogiltigt index.", "error", "gameMessage");
     }
 }
 
@@ -103,7 +101,7 @@ function editGame(index) {
         editIndex = index;
 
     } else {
-        alert("Ogiltigt index.");
+        showMessage("Ogiltigt index.", "error", "gameMessage");
     }
 }
 
@@ -140,4 +138,23 @@ function gameGallery () {
         `;
         gallery.appendChild(gameItem);
     });
+}
+
+function showMessage(text, type, id) {
+    const message = document.getElementById(id);
+    message.textContent = text;
+
+    if (type === "success") {
+        message.style.color = "green";
+
+    } else if (type === "error") {
+        message.style.color = "red";
+    }
+    message.style.display = "block";
+
+    setTimeout(() => {
+        message.style.display = "none";
+    }, 3000);
+    
+    
 }
